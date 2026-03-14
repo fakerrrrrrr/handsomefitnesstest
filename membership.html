@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Plans - Handsome Fitness Premium Gym & Pool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #0085FF 0%, #0066CC 100%);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #0085FF;
+        }
+
+        .nav-link.active {
+            color: #0085FF;
+            font-weight: 600;
+        }
+
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+
+        .pricing-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 133, 255, 0.15);
+        }
+
+        .featured-card {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 133, 255, 0.25);
+        }
+
+        .featured-card:hover {
+            transform: scale(1.08) translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 133, 255, 0.3);
+        }
+
+        .benefit-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .scroll-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .checkmark {
+            color: #0085FF;
+            font-weight: 600;
+            margin-right: 12px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 24px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #FFCC5D;
+            color: #202020;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(255, 204, 93, 0.4);
+        }
+
+        .savings-badge {
+            display: inline-block;
+            background: #10B981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .featured-card {
+                transform: scale(1);
+            }
+
+            .featured-card:hover {
+                transform: translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-[#202020]">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-[#202020]">
+                        Handsome <span class="text-[#0085FF]">Fitness</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-[#202020] hover:text-[#0085FF] font-medium">Home</a>
+                    <a href="facilities.html" class="nav-link text-[#202020] hover:text-[#0085FF] font-medium">Facilities</a>
+                    <a href="membership.html" class="nav-link active text-[#0085FF] font-medium">Membership</a>
+                    <a href="classes.html" class="nav-link text-[#202020] hover:text-[#0085FF] font-medium">Classes</a>
+                    <a href="tel:0923957233" class="bg-[#0085FF] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#0066CC] transition-colors">
+                        Call Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-[#202020] focus:outline-none" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div class="mobile-menu md:hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="index.html" class="block px-3 py-2 text-[#202020] hover:text-[#0085FF] font-medium">Home</a>
+                    <a href="facilities.html" class="block px-3 py-2 text-[#202020] hover:text-[#0085FF] font-medium">Facilities</a>
+                    <a href="membership.html" class="block px-3 py-2 text-[#0085FF] font-semibold">Membership</a>
+                    <a href="classes.html" class="block px-3 py-2 text-[#202020] hover:text-[#0085FF] font-medium">Classes</a>
+                    <a href="tel:0923957233" class="block px-3 py-2 bg-[#0085FF] text-white rounded-lg font-semibold text-center">
+                        Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Breadcrumb -->
+            <div class="text-sm mb-6 opacity-90">
+                <a href="index.html" class="hover:underline">Home</a>
+                <span class="mx-2">></span>
+                <span>Membership</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Membership Plans</h1>
+            <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
+                Choose the perfect plan for your fitness journey
+            </p>
+        </div>
+    </section>
+
+    <!-- Membership Pricing Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#202020] mb-4">Flexible Membership Options</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Select the plan that fits your lifestyle</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+                <!-- Day Pass -->
+                <div class="pricing-card bg-white rounded-[16px] p-8 border-2 border-gray-200 scroll-fade-in">
+                    <div class="text-5xl mb-4 text-center">🎫</div>
+                    <h3 class="text-2xl font-bold text-[#202020] mb-2 text-center">Day Pass</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-4xl font-bold text-[#0085FF]">฿300</span>
+                        <span class="text-gray-600 ml-2">per day</span>
+                    </div>
+                    <p class="text-gray-600 text-center mb-6">Perfect for visitors and travelers</p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Full gym access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Swimming pool access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Locker and towel service</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Valid for one day</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">No commitment required</span>
+                        </li>
+                    </ul>
+
+                    <a href="contact.html" class="block w-full bg-[#202020] text-white text-center py-3 rounded-lg font-semibold hover:bg-[#404040] transition-colors">
+                        Get Day Pass
+                    </a>
+                </div>
+
+                <!-- Monthly Membership (Featured) -->
+                <div class="pricing-card featured-card hero-gradient rounded-[16px] p-8 text-white relative scroll-fade-in">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="text-5xl mb-4 text-center">📅</div>
+                    <h3 class="text-2xl font-bold mb-2 text-center">Monthly Membership</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-4xl font-bold">฿2,500</span>
+                        <span class="opacity-90 ml-2">per month</span>
+                    </div>
+                    <p class="text-center mb-6 opacity-90">Best value for regular training</p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="checkmark text-white">✓</span>
+                            <span>Unlimited gym access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark text-white">✓</span>
+                            <span>Unlimited pool access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark text-white">✓</span>
+                            <span>All classes included</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark text-white">✓</span>
+                            <span>Locker and towel service</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark text-white">✓</span>
+                            <span>Free parking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark text-white">✓</span>
+                            <span>Guest pass (1 per month)</span>
+                        </li>
+                    </ul>
+
+                    <a href="contact.html" class="block w-full bg-white text-[#0085FF] text-center py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        Join Now
+                    </a>
+                </div>
+
+                <!-- 6-Month Membership -->
+                <div class="pricing-card bg-white rounded-[16px] p-8 border-2 border-[#0085FF] scroll-fade-in">
+                    <div class="text-5xl mb-4 text-center">💎</div>
+                    <h3 class="text-2xl font-bold text-[#202020] mb-2 text-center">6-Month Membership</h3>
+                    <div class="text-center mb-4">
+                        <span class="text-4xl font-bold text-[#0085FF]">฿12,000</span>
+                        <span class="text-gray-600 ml-2">6 months</span>
+                        <span class="savings-badge">Save ฿3,000</span>
+                    </div>
+                    <p class="text-gray-600 text-center mb-6">Maximum value and commitment</p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Everything in Monthly plan</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Priority class booking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Free personal training session</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Nutrition consultation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Member discount on services</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="checkmark">✓</span>
+                            <span class="text-gray-700">Bring a friend anytime</span>
+                        </li>
+                    </ul>
+
+                    <a href="contact.html" class="block w-full bg-[#0085FF] text-white text-center py-3 rounded-lg font-semibold hover:bg-[#0066CC] transition-colors">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Benefits Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#202020] mb-4">Why Become a Member?</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div class="benefit-card bg-gray-50 rounded-[16px] p-8 text-center scroll-fade-in">
+                    <div class="text-5xl mb-4">🏋️</div>
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">Complete Fitness Access</h3>
+                    <p class="text-gray-600">Full access to all gym equipment, swimming pool, yoga studio, and sauna facilities</p>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="benefit-card bg-gray-50 rounded-[16px] p-8 text-center scroll-fade-in">
+                    <div class="text-5xl mb-4">👨‍🏫</div>
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">Expert Guidance</h3>
+                    <p class="text-gray-600">Professional staff available to help with training techniques and fitness advice</p>
+                </div>
+
+                <!-- Benefit 3 -->
+                <div class="benefit-card bg-gray-50 rounded-[16px] p-8 text-center scroll-fade-in">
+                    <div class="text-5xl mb-4">⏰</div>
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">Flexible Hours</h3>
+                    <p class="text-gray-600">Train on your schedule with convenient opening hours from 7 AM</p>
+                </div>
+
+                <!-- Benefit 4 -->
+                <div class="benefit-card bg-gray-50 rounded-[16px] p-8 text-center scroll-fade-in">
+                    <div class="text-5xl mb-4">⭐</div>
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">Premium Facilities</h3>
+                    <p class="text-gray-600">Enjoy world-class equipment and well-maintained facilities in a clean environment</p>
+                </div>
+
+                <!-- Benefit 5 -->
+                <div class="benefit-card bg-gray-50 rounded-[16px] p-8 text-center scroll-fade-in">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">Community Environment</h3>
+                    <p class="text-gray-600">Join a friendly community of fitness enthusiasts in Chiang Mai</p>
+                </div>
+
+                <!-- Benefit 6 -->
+                <div class="benefit-card bg-gray-50 rounded-[16px] p-8 text-center scroll-fade-in">
+                    <div class="text-5xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">No Hidden Fees</h3>
+                    <p class="text-gray-600">Transparent pricing with no surprise charges or hidden costs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#202020] mb-4">All Memberships Include</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Left Column -->
+                <div class="space-y-4 scroll-fade-in">
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Full gym equipment access</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Large lap swimming pool</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Yoga studio access</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Sauna facilities</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Clean locker rooms</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Towel service</span>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-4 scroll-fade-in">
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Free parking</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">WiFi access</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Shower facilities</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Air-conditioned comfort</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Professional staff support</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="checkmark text-2xl">✓</span>
+                        <span class="text-lg text-gray-700">Beautiful training environment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#202020] mb-4">Membership FAQs</h2>
+            </div>
+
+            <div class="space-y-0 scroll-fade-in">
+                <div class="faq-item">
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">What payment methods do you accept?</h3>
+                    <p class="text-gray-600">We accept cash, bank transfer, and credit cards. Payment is required at the time of registration.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">Can I freeze my membership?</h3>
+                    <p class="text-gray-600">Yes, monthly and long-term memberships can be frozen for up to 30 days with advance notice.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">Is there a joining fee?</h3>
+                    <p class="text-gray-600">No joining fee required. The price you see is the price you pay.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">Can I bring a guest?</h3>
+                    <p class="text-gray-600">Monthly members receive 1 guest pass per month. Long-term members can bring a friend anytime.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">What if I want to cancel?</h3>
+                    <p class="text-gray-600">Day passes are non-refundable. Monthly memberships can be cancelled with 7 days notice. 6-month memberships are non-refundable.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="text-xl font-bold text-[#202020] mb-3">Do you offer student or senior discounts?</h3>
+                    <p class="text-gray-600">Please contact us directly to inquire about special rates and promotions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="hero-gradient text-white py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Fitness Journey?</h2>
+            <p class="text-xl mb-10 opacity-90">Join Handsome Fitness today and transform your life</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="bg-white text-[#0085FF] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Visit Gym for Tour
+                </a>
+                <a href="tel:0923957233" class="bg-[#202020] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#404040] transition-colors">
+                    Call 092 395 7233
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#202020] text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- About Column -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Handsome <span class="text-[#0085FF]">Fitness</span></h3>
+                    <p class="text-gray-400 mb-4">
+                        Premium gym and swimming pool facility in Chiang Mai, Thailand. Your destination for fitness excellence.
+                    </p>
+                    <div class="flex items-center gap-2 text-[#FFCC5D]">
+                        <span class="text-xl">⭐⭐⭐⭐⭐</span>
+                        <span class="text-sm text-gray-400">4.3 (81 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div>
+                    <h4 class="text-xl font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-[#0085FF] transition-colors">Home</a></li>
+                        <li><a href="facilities.html" class="text-gray-400 hover:text-[#0085FF] transition-colors">Facilities</a></li>
+                        <li><a href="membership.html" class="text-gray-400 hover:text-[#0085FF] transition-colors">Membership</a></li>
+                        <li><a href="classes.html" class="text-gray-400 hover:text-[#0085FF] transition-colors">Classes</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-[#0085FF] transition-colors">Gallery</a></li>
+                        <li><a href="reviews.html" class="text-gray-400 hover:text-[#0085FF] transition-colors">Reviews</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-[#0085FF] transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div>
+                    <h4 class="text-xl font-bold mb-6">Contact Us</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#0085FF] text-xl">📍</span>
+                            <span class="text-gray-400">1317 Ton Pao, San Kamphaeng District, Chiang Mai 50130, Thailand</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#0085FF] text-xl">📞</span>
+                            <a href="tel:0923957233" class="text-gray-400 hover:text-[#0085FF] transition-colors">092 395 7233</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#0085FF] text-xl">⏰</span>
+                            <span class="text-gray-400">Opens 7 AM Daily</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-[#0085FF] text-xl">👍</span>
+                            <a href="https://facebook.com" target="_blank" class="text-gray-400 hover:text-[#0085FF] transition-colors">Facebook</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm text-center sm:text-left">
+                    © 2024 Handsome Fitness Premium Gym & Pool. All rights reserved.
+                </p>
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById(`mobile-menu-btn`);
+        const mobileMenu = document.getElementById(`mobile-menu`);
+
+        mobileMenuBtn.addEventListener(`click`, () => {
+            mobileMenu.classList.toggle(`active`);
+        });
+
+        // Scroll Fade-in Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: `0px 0px -50px 0px`
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(`visible`);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll(`.scroll-fade-in`).forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll(`a[href^="#"]`).forEach(anchor => {
+            anchor.addEventListener(`click`, function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute(`href`));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: `smooth`,
+                        block: `start`
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.kuse.ai/sdk.prd.js"></script>
+</body>
+</html>
